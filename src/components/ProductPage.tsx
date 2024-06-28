@@ -1,20 +1,14 @@
+import MyCarousel from "./MyCarousel";
+
 const ProductPage = () => {
   return (
-    <section className=" max-container">
-      <div className="grid min-[920px]:grid-cols-2 border border-violet-600">
-        <div className="border border-red-500">
-          <h1>first column</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum enim
-            magni possimus, aut repellendus ab reprehenderit excepturi delectus
-            nam itaque assumenda quam! Enim, totam! Asperiores laboriosam
-            voluptas porro autem a! Vitae fugit magni, ea voluptatum expedita
-            voluptates modi dolores sed ipsum pariatur culpa atque optio sint!
-            Odio quo aliquam quas.
-          </p>
-        </div>
+    <section className=" min-[920px]:max-container min-[920px]:mt-[90px] min-h-screen">
+      <div className="grid min-[920px]:grid-cols-2  gap-x-10 gap-y-6">
         <div>
-          <p className="font-bold text-[#FF7E1B] tracking-[1.85px] text-[12px]">
+          <MyCarousel />
+        </div>
+        <div className="self-center max-[920px]:max-container">
+          <p className="font-bold text-[#FF7E1B] tracking-[1.85px] text-[12px] uppercase">
             Sneaker Company
           </p>
           <h2 className="font-bold text-3xl text-[#1D2026] mt-4 min-[920px]:text-5xl">
