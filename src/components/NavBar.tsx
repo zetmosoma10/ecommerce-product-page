@@ -5,8 +5,13 @@ import logo from "../assets/logo.svg";
 import cartIcon from "../assets/icon-cart.svg";
 import avatar from "../assets/image-avatar.png";
 import SideBar from "./SideBar";
+import { Cart } from "../App";
 
-const NavBar = () => {
+interface Props {
+  cartItemsCount: number;
+  cartArr: Cart[];
+}
+const NavBar = ({ cartItemsCount, cartArr }: Props) => {
   const [toggle, setToggle] = useState(false);
 
   const setToggleOn = () => {
@@ -41,7 +46,14 @@ const NavBar = () => {
           </ul>
         </div>
         <div className="flex items-center space-x-12">
-          <img className="cursor-pointer" src={cartIcon} alt="" />
+          <div className="relative">
+            {cartArr.length > 0 && (
+              <div className="absolute text-[10px] right-[-6px] top-[-12px] px-[6px] py-[3px] text-white bg-[#FF7E1B] rounded-[6.5px]">
+                {cartItemsCount}
+              </div>
+            )}
+            <img className="cursor-pointer" src={cartIcon} alt="" />
+          </div>
           <img className="w-12 h-12" src={avatar} alt="" />
         </div>
       </nav>

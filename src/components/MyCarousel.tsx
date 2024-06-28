@@ -44,6 +44,7 @@ const MyCarousel = () => {
       <div className="flex justify-around mt-8 max-[920px]:hidden">
         {thumbnailShoesImages.map((item, index) => (
           <div
+            key={index}
             className={`${index === selectedImage ? "border-[3px] border-[#FF7E1B]" : ""}   w-[88px] h-[88px] cursor-pointer rounded-[10px] overflow-hidden`}
           >
             <img
