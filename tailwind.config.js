@@ -6,7 +6,3 @@ export default {
   },
   plugins: ["prettier-plugin-tailwindcss"],
 };
-
-// fontFamily: {
-//   kumbh: ["Kumbh Sans", "sans-serif"],
-// },
