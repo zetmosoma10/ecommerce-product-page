@@ -1,20 +1,10 @@
+import useCartStore from "../store";
 import MyCarousel from "./MyCarousel";
 
-interface Props {
-  count: number;
-  addItemCount: () => void;
-  subtractItemCount: () => void;
-  addItemToCart: () => void;
-  resetCount: () => void;
-}
+const ProductPage = () => {
+  const { addItem, count, incrementCount, decrementCount, resetCount } =
+    useCartStore();
 
-const ProductPage = ({
-  count,
-  addItemCount,
-  subtractItemCount,
-  addItemToCart,
-  resetCount,
-}: Props) => {
   return (
     <section className=" min-[920px]:max-container mb-5 min-[920px]:mt-[90px] min-h-screen">
       <div className="grid min-[920px]:grid-cols-2  gap-x-10 gap-y-6">
@@ -51,14 +41,14 @@ const ProductPage = ({
             <div className="flex items-center justify-around bg-[#F6F8FD] p-5 rounded-lg min-[920px]:w-[65%]">
               <button
                 disabled={count === 0}
-                onClick={() => subtractItemCount()}
+                onClick={() => decrementCount()}
                 className="font-bold text-lg text-[#FF7E1B] hover:text-opacity-75 active:scale-110 disabled:cursor-not-allowed"
               >
                 -
               </button>
               <p className="font-bold text-base text-[#1D2026]">{count}</p>
               <button
-                onClick={() => addItemCount()}
+                onClick={() => incrementCount()}
                 className="font-bold text-lg text-[#FF7E1B] hover:text-opacity-75 active:scale-110"
               >
                 +
@@ -66,7 +56,7 @@ const ProductPage = ({
             </div>
             <button
               onClick={() => {
-                addItemToCart();
+                addItem();
                 resetCount();
               }}
               disabled={count === 0}

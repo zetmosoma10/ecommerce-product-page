@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { menuLinkList } from "../contance";
-import humburger from "../assets/icon-menu.svg";
-import logo from "../assets/logo.svg";
 import cartIcon from "../assets/icon-cart.svg";
+import humburger from "../assets/icon-menu.svg";
 import avatar from "../assets/image-avatar.png";
-import SideBar from "./SideBar";
-import { Cart as CartType } from "../App";
+import logo from "../assets/logo.svg";
+import { menuLinkList } from "../contance";
+import useCartStore from "../store";
 import Cart from "./Cart";
+import SideBar from "./SideBar";
 
-export interface Props {
-  cartArr: CartType[];
-  removeItemFromCart: (id: string) => void;
-}
-
-const NavBar = ({ cartArr, removeItemFromCart }: Props) => {
+const NavBar = () => {
+  const { cartItems } = useCartStore();
   const [toggle, setToggle] = useState(false);
   const [cartToggle, setCartToggle] = useState(false);
 
@@ -54,9 +50,9 @@ const NavBar = ({ cartArr, removeItemFromCart }: Props) => {
         </div>
         <div className="flex items-center space-x-12">
           <div onClick={handleCartToggle} className="relative cursor-pointer">
-            {cartArr.length > 0 && (
+            {cartItems.length > 0 && (
               <div className="absolute text-[10px] right-[-6px] top-[-12px] px-[6px] py-[3px] text-white bg-[#FF7E1B] rounded-[6.5px]">
-                {cartArr.length}
+                {cartItems.length}
               </div>
             )}
             <img src={cartIcon} alt="" />
@@ -71,7 +67,7 @@ const NavBar = ({ cartArr, removeItemFromCart }: Props) => {
       )}
       {cartToggle && (
         <div className="absolute right-0 top-[90px] z-10">
-          <Cart cartArr={cartArr} removeItemFromCart={removeItemFromCart} />
+          <Cart />
         </div>
       )}
     </>
