@@ -7,7 +7,7 @@ interface Props {
 
 const SideBar = ({ setToggleOff }: Props) => {
   return (
-    <aside className="bg-white border  w-[65%] min-h-screen p-6 ">
+    <aside className="bg-white border  w-[65%] min-h-screen p-6 z-50">
       <header>
         <img onClick={setToggleOff} src={closeIcon} alt="" />
       </header>

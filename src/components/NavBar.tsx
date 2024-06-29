@@ -65,7 +65,7 @@ const NavBar = ({ cartArr, removeItemFromCart }: Props) => {
         </div>
       </nav>
       {toggle && (
-        <div className="absolute left-0 top-0 border w-full h-screen bg-zinc-700 bg-opacity-30  min-[920px]:hidden">
+        <div className="absolute left-0 top-0 border w-full h-screen bg-zinc-700 bg-opacity-30  min-[920px]:hidden z-50">
           <SideBar setToggleOff={setToggleOff} />
         </div>
       )}
