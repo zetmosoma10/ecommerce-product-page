@@ -10,7 +10,6 @@ export interface Cart {
 
 export default function App() {
   const [cartArr, setCartArr] = useState<Cart[]>([]);
-  console.log(cartArr);
 
   const [count, setCount] = useState(0);
 

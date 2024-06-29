@@ -25,7 +25,11 @@ const MyCarousel = () => {
   return (
     <div>
       <div className="relative rounded-2xl overflow-hidden max-[920px]:rounded-none ">
-        <img src={previewShoesImages[selectedImage]} alt="" />
+        <img
+          className="object-cover"
+          src={previewShoesImages[selectedImage]}
+          alt=""
+        />
         <div
           onClick={previousSelectedImage}
           className="flex items-center justify-center cursor-pointer absolute left-4 
