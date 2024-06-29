@@ -5,14 +5,17 @@ import logo from "../assets/logo.svg";
 import cartIcon from "../assets/icon-cart.svg";
 import avatar from "../assets/image-avatar.png";
 import SideBar from "./SideBar";
-import { Cart } from "../App";
+import { Cart as CartType } from "../App";
+import Cart from "./Cart";
 
-interface Props {
-  cartItemsCount: number;
-  cartArr: Cart[];
+export interface Props {
+  cartArr: CartType[];
+  removeItemFromCart: (id: string) => void;
 }
-const NavBar = ({ cartItemsCount, cartArr }: Props) => {
+
+const NavBar = ({ cartArr, removeItemFromCart }: Props) => {
   const [toggle, setToggle] = useState(false);
+  const [cartToggle, setCartToggle] = useState(false);
 
   const setToggleOn = () => {
     setToggle(true);
@@ -20,6 +23,10 @@ const NavBar = ({ cartItemsCount, cartArr }: Props) => {
 
   const setToggleOff = () => {
     setToggle(false);
+  };
+
+  const handleCartToggle = () => {
+    setCartToggle(!cartToggle);
   };
 
   return (
@@ -46,13 +53,13 @@ const NavBar = ({ cartItemsCount, cartArr }: Props) => {
           </ul>
         </div>
         <div className="flex items-center space-x-12">
-          <div className="relative">
+          <div onClick={handleCartToggle} className="relative cursor-pointer">
             {cartArr.length > 0 && (
               <div className="absolute text-[10px] right-[-6px] top-[-12px] px-[6px] py-[3px] text-white bg-[#FF7E1B] rounded-[6.5px]">
-                {cartItemsCount}
+                {cartArr.length}
               </div>
             )}
-            <img className="cursor-pointer" src={cartIcon} alt="" />
+            <img src={cartIcon} alt="" />
           </div>
           <img className="w-12 h-12" src={avatar} alt="" />
         </div>
@@ -60,6 +67,11 @@ const NavBar = ({ cartItemsCount, cartArr }: Props) => {
       {toggle && (
         <div className="absolute left-0 top-0 border w-full h-screen bg-zinc-700 bg-opacity-30  min-[920px]:hidden">
           <SideBar setToggleOff={setToggleOff} />
+        </div>
+      )}
+      {cartToggle && (
+        <div className="absolute right-0 top-[90px] z-10">
+          <Cart cartArr={cartArr} removeItemFromCart={removeItemFromCart} />
         </div>
       )}
     </>

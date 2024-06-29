@@ -1,47 +1,48 @@
 import { useState } from "react";
 import NavBar from "./components/NavBar";
 import ProductPage from "./components/ProductPage";
+import { nanoid } from "nanoid";
 
 export interface Cart {
   count: number;
-  amount: number;
-  discountRate: number;
+  id: string;
 }
 
 export default function App() {
   const [cartArr, setCartArr] = useState<Cart[]>([]);
-  const [cartData, setCartData] = useState({
-    count: 0,
-    amount: 2560,
-    discountRate: 0.5,
-  });
+  console.log(cartArr);
+
+  const [count, setCount] = useState(0);
 
   const addItemToCart = () => {
-    setCartArr([...cartArr, cartData]);
+    setCartArr([...cartArr, { count, id: nanoid() }]);
+  };
+
+  const removeItemFromCart = (id: string) => {
+    setCartArr(cartArr.filter((cartItem) => cartItem.id !== id));
+  };
+
+  const resetCount = () => {
+    setCount(0);
   };
 
   const subtractItemCount = () => {
-    setCartData((prevState) => ({
-      ...prevState,
-      count: prevState.count - 1,
-    }));
+    setCount(count - 1);
   };
 
   const addItemCount = () => {
-    setCartData((prevState) => ({
-      ...prevState,
-      count: prevState.count + 1,
-    }));
+    setCount(count + 1);
   };
 
   return (
     <div className="min-h-screen">
-      <NavBar cartArr={cartArr} cartItemsCount={cartData.count} />
+      <NavBar cartArr={cartArr} removeItemFromCart={removeItemFromCart} />
       <ProductPage
         subtractItemCount={subtractItemCount}
         addItemCount={addItemCount}
-        cartData={cartData}
+        count={count}
         addItemToCart={addItemToCart}
+        resetCount={resetCount}
       />
     </div>
   );

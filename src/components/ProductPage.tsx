@@ -1,18 +1,19 @@
-import { Cart } from "../App";
 import MyCarousel from "./MyCarousel";
 
 interface Props {
-  cartData: Cart;
+  count: number;
   addItemCount: () => void;
   subtractItemCount: () => void;
   addItemToCart: () => void;
+  resetCount: () => void;
 }
 
 const ProductPage = ({
-  cartData,
+  count,
   addItemCount,
   subtractItemCount,
   addItemToCart,
+  resetCount,
 }: Props) => {
   return (
     <section className=" min-[920px]:max-container mb-5 min-[920px]:mt-[90px] min-h-screen">
@@ -37,29 +38,25 @@ const ProductPage = ({
             min-[920px]:items-start min-[920px]:gap-2"
           >
             <div className="flex items-center space-x-4">
-              <span className="font-bold text-3xl text-[#1D202]">
-                R{cartData.amount}
-              </span>
+              <span className="font-bold text-3xl text-[#1D202]">R2765</span>
               <span className="bg-[#FFEEE2] text-[#FF7E1B] text-base font-bold rounded-md pt-[7px] px-[8px] pb-[4px] ">
                 50%
               </span>
             </div>
             <span className="font-bold text-base text-[#B6BCC8] line-through">
-              R{cartData.amount * cartData.discountRate}
+              R{2765 * 0.5}
             </span>
           </div>
           <div className="flex flex-col gap-4 mt-6 min-[920px]:flex-row ">
             <div className="flex items-center justify-around bg-[#F6F8FD] p-5 rounded-lg min-[920px]:w-[65%]">
               <button
-                disabled={cartData.count === 0}
+                disabled={count === 0}
                 onClick={() => subtractItemCount()}
                 className="font-bold text-lg text-[#FF7E1B] hover:text-opacity-75 active:scale-110 disabled:cursor-not-allowed"
               >
                 -
               </button>
-              <p className="font-bold text-base text-[#1D2026]">
-                {cartData.count}
-              </p>
+              <p className="font-bold text-base text-[#1D2026]">{count}</p>
               <button
                 onClick={() => addItemCount()}
                 className="font-bold text-lg text-[#FF7E1B] hover:text-opacity-75 active:scale-110"
@@ -68,8 +65,11 @@ const ProductPage = ({
               </button>
             </div>
             <button
-              onClick={() => addItemToCart()}
-              disabled={cartData.count === 0}
+              onClick={() => {
+                addItemToCart();
+                resetCount();
+              }}
+              disabled={count === 0}
               className="flex items-center justify-center  text-white font-bold text-base bg-[#FF7E1B] py-[18px] 
                 rounded-lg w-full hover:bg-opacity-75 disabled:cursor-not-allowed"
             >
